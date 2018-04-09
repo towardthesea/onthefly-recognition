@@ -28,7 +28,7 @@ bool CropperThread::threadInit()
     mutex.wait();
 
 	radius_robot = rf.check("radius_robot",Value(80)).asInt();
-	radius_human = rf.check("radius_human",Value(40)).asInt();
+    radius_human = rf.check("radius_human",Value(40)).asInt();
 	radius = radius_human;
 
 	skip_frames = rf.check("skip_frames",Value(5)).asInt();

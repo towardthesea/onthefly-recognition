@@ -251,6 +251,7 @@ bool ManagerThread::threadInit()
 
     // out speech
     port_out_speech.open(("/"+name+"/speech:o").c_str());
+    port_out_class.open(("/"+name+"/class:o").c_str());
 
     thr_cropper = new CropperThread(rf);
     thr_cropper->start();
@@ -317,6 +318,11 @@ void ManagerThread::run()
     {
         thr_scorer->get_predicted_class(current_class);
         thr_cropper->set_displayed_class(current_class);
+
+        Bottle& output = port_out_class.prepare();
+        output.clear();
+        output.addString(current_class);
+        port_out_class.write();
     }
 
     if (state==STATE_WHATISTHIS)
@@ -719,7 +725,9 @@ bool ManagerThread::execHumanCmd(Bottle &command, Bottle &reply)
                 {
                     is_face = command.get(1).asBool();
                     set_state(STATE_WHATISTHIS);
-                    reply.addVocab(ACK);
+                    string current_class;
+                    thr_scorer->get_predicted_class(current_class);
+                    reply.addString(current_class);
 
                 }
             }

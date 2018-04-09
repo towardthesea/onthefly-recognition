@@ -85,6 +85,7 @@ private:
 
 	// output
 	Port                                port_out_speech;
+    BufferedPort<Bottle>                port_out_class;
 
 	double                              human_time_training;
 
