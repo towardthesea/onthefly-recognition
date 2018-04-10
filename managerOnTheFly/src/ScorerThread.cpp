@@ -145,7 +145,7 @@ void ScorerThread::run()
 	}
 
 	predicted_class = scores_buffer.front().get(max_avg_idx).asList()->get(0).asString().c_str();
-	if (max_votes/scores_buffer.size()<0.2)
+    if (max_votes/scores_buffer.size()<0.5)
 		predicted_class = "?";
 
 	cout << "Scores: " << endl;
