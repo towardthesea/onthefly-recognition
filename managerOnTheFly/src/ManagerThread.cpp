@@ -266,7 +266,8 @@ bool ManagerThread::threadInit()
 
     set_mode(MODE_HUMAN);
     set_state(STATE_CLASSIFYING);
-    set_crop_mode(CROP_MODE_RADIUS);
+//    set_crop_mode(CROP_MODE_RADIUS);
+    set_crop_mode(CROP_MODE_BBDISP);
     
     is_face = false;
 
